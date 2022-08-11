@@ -7,13 +7,16 @@ const initialState = {
   loading: true,
 };
 
-const API_KEY = process.env.REACT_APP_apiKey;
+// const API_KEY = process.env.REACT_APP_apiKey;
+const API_KEY = "fMF7gWWi2IBeGGmo6tbzK6oNIot3CGgW";
 
 export const getNews = createAsyncThunk("news/getNews", async () => {
   const url = `https://api.nytimes.com/svc/mostpopular/v2/viewed/1.json?api-key=${API_KEY}`;
   try {
-    const { data } = await axios(url);
-    console.log(data);
+    const {
+      data: { results },
+    } = await axios.get(url);
+    return results;
   } catch (error) {
     console.log(error);
   }
