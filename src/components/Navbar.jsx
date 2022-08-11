@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static" color="primary">
         <Toolbar>
           <Typography
             variant="h6"
@@ -29,7 +29,7 @@ export default function Navbar() {
             sx={{ flexGrow: 1, cursor: "pointer" }}
             onClick={() => navigate("/")}
           >
-            Clarusway News
+            Popular Articles
           </Typography>
           {user ? (
             <Button color="inherit" onClick={handleLogout}>
