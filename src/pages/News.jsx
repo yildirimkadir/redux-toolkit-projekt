@@ -9,6 +9,7 @@ import loadingGif from "../assets/loading.gif";
 import { useDispatch, useSelector } from "react-redux";
 import { clearNewsList, getNews } from "../features/newsSlice";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -20,9 +21,6 @@ const News = () => {
       dispatch(clearNewsList());
     };
   }, [dispatch]);
-
-  // console.log(newsList[0].abstract);
-
   return (
     <>
       {loading && (
@@ -43,30 +41,42 @@ const News = () => {
           justifyContent="space-evenly"
           flexWrap="wrap"
         >
-          {newsList?.map((item, index) => (
-            <Card sx={{ maxWidth: 345, m: 5, maxHeight: 600 }} key={index}>
-              {/* <CardMedia
-                component="img"
-                height="250"
-                image={item.media[0]["media - metadata"][1].url}
-                alt="img"
-              /> */}
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item?.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item?.abstract}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Share</Button>
-                <Button size="small" href={item?.url} target="_blank">
-                  Detail
-                </Button>
-              </CardActions>
-            </Card>
-          ))}
+          {newsList?.map((item, index) => {
+            const {
+              title,
+              abstract,
+              url,
+              image = item.media.map((x) => x["media-metadata"][1]["url"]),
+            } = item;
+            console.log(image[0]);
+            return (
+              <>
+                <Card sx={{ maxWidth: 345, m: 5, maxHeight: 600 }} key={index}>
+                  <CardMedia
+                    component="img"
+                    height="250"
+                    image={image[0]}
+                    alt="img"
+                  />
+
+                  <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                      {title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {abstract}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">Share</Button>
+                    <Button size="small" href={url} target="_blank">
+                      Detail
+                    </Button>
+                  </CardActions>
+                </Card>
+              </>
+            );
+          })}
         </Box>
       )}
     </>
