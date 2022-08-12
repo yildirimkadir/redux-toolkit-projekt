@@ -1,5 +1,5 @@
 ### - [Redux-toolkit-news-app](https://redux-toolkit-news-app.netlify.app/)
-![](./src/assets/toolkit.gif)
+![](./src/assets/redux-toolkit.gif)
 
 # Getting Started with Create React App
 
